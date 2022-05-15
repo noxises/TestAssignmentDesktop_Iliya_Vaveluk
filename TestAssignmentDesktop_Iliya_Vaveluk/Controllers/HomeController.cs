@@ -17,16 +17,16 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.currencies = APIController.GetTop10Currencies().GetAwaiter().GetResult();
+            ViewBag.currencies = APIController.GetTop10Currencies();
             return View();
         }
 
         public IActionResult Currency(string id)
         {
-            ViewBag.currency = APIController.GetCurrency(id).GetAwaiter().GetResult();
-            ViewBag.markets = APIController.GetMarkets(id).GetAwaiter().GetResult();
-            ViewBag.history = APIController.GetHistory(id).GetAwaiter().GetResult();
-            ViewBag.exchanges = APIController.GetExchanges().GetAwaiter().GetResult();
+            ViewBag.currency = APIController.GetCurrency(id);
+            ViewBag.markets = APIController.GetMarkets(id);
+            ViewBag.history = APIController.GetHistory(id);
+            ViewBag.exchanges = APIController.GetExchanges();
             return View();
         }
 
