@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TestAssignmentDesktop_Iliya_Vaveluk.Models;
+using Newtonsoft.Json;
 
 namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 {
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -15,6 +17,16 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.currencies = APIController.GetTop10Currencies().GetAwaiter().GetResult();
+            return View();
+        }
+
+        public IActionResult Currency(string id)
+        {
+            ViewBag.currency = APIController.GetCurrency(id).GetAwaiter().GetResult();
+            ViewBag.markets = APIController.GetMarkets(id).GetAwaiter().GetResult();
+            ViewBag.history = APIController.GetHistory(id).GetAwaiter().GetResult();
+            ViewBag.exchanges = APIController.GetExchanges().GetAwaiter().GetResult();
             return View();
         }
 
