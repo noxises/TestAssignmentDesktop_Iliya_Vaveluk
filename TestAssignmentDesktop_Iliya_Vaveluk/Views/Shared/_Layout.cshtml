@@ -13,10 +13,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TestAssignmentDesktop_Iliya_Vaveluk.styles.css" asp-append-version="true" />
 
+
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  bg-white">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm " id="nav">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +44,7 @@
                         </form>
                         <i class="fa fa-search js-search" aria-hidden="true"></i>
                     </div>
-                    <ul class="elastic hide">
+                    <ul class="elastic hide" id="elastic-list">
                         <li class="error hide" title="$">NOTING TO SHOW ON SEARCH</li>
 
                         @foreach (var currencyList in allCurrencies)
@@ -50,18 +52,19 @@
 
                             <li class="hide" title="@currencyList.name" onclick="location.href='/Home/Currency/@currencyList.id'">
 
-                                <div class="search_title">@currencyList.name (@currencyList.symbol)</div>
+                                @currencyList.name (@currencyList.symbol)
 
                             </li>
                         }
                     </ul>
                     <div>
-                    <button>
-                        darkmode
-                    </button>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">DarkMode</label>
+                        </div>
+                    </div>
                 </div>
-                </div>
-                
+
             </div>
 
         </nav>
@@ -77,56 +80,7 @@
             &copy; 2022 - TestAssignmentDesktop_Iliya_Vaveluk - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script>
-        function livesearch() {
-            var i = 0;
-            let val = document.querySelector('.elastic-box').value.trim();
-            let elasticItems = document.querySelectorAll('.elastic li');
-            if (val != '') {
-                if (/[a-zA-Z]/.test(val)) {
-                    document.querySelector('.elastic-box').classList.add('search_active')
-                    document.querySelector('.elastic-box').classList.remove('input_search')
-                    elasticItems.forEach(function(elem) {
 
-                        if (elem.getAttribute('title').search(RegExp(val, "gi")) == -1) {
-                            elem.classList.add('hide');
-                            if (i == 0) {
-                                document.querySelector('.error').classList.remove('hide')
-                            } else {
-                                document.querySelector('.elastic').classList.remove('hide')
-                                document.querySelector('.error').classList.add('hide')
-                            }
-                        } else {
-                            i++;
-                            elem.classList.remove('hide');
-                            if (i == 0) {
-                                document.querySelector('.elastic').classList.add('hide')
-                            } else {
-                                document.querySelector('.elastic').classList.remove('hide')
-                            }
-                        }
-                    });
-                } else {
-
-                    document.querySelector('.elastic').classList.remove('hide')
-                    document.querySelector('.elastic-box').classList.add('search_active')
-                    document.querySelector('.elastic-box').classList.remove('input_search')
-                    document.querySelector('.error').classList.remove('hide')
-
-                }
-            } else {
-                elasticItems.forEach(function(elem) {
-                    elem.classList.add('hide');
-                    document.querySelector('.elastic').classList.add('hide')
-                    document.querySelector('.elastic-box').classList.remove('search_active')
-                    document.querySelector('.elastic-box').classList.add('input_search')
-
-                });
-            }
-        }
-
-
-    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -6,7 +6,7 @@
 <h1 class="text-center">@ViewBag.currency.name</h1>
 
 <div class="currency_table">
-    <table class="table">
+    <table class="table" id="table">
 
         <tbody>
             <tr>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>priceUsd</td>
-                <td>@ViewBag.currency.priceUsd</td>
+                <td>@ViewBag.currency.priceUsd $</td>
                 <td>weighted price based on real-time market data, translated to USD</td>
             </tr>
             <tr>
@@ -54,8 +54,8 @@
     </table>
 </div>
 
-<h2 class="text-center">Markets</h2>
-<ul class="top_currencies_list">
+<h2 class="text-center mt-2">Markets</h2>
+<ul class="top_currencies_list mt-2">
     @foreach (var exchange in ViewBag.exchanges)
 
     {
@@ -75,13 +75,15 @@
 
     }
 </ul>
-
+<div id="container" class="border-top" style="height:500px"></div>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-cartesian.min.js"></script>
 
-<div id="container" style="height:500px"></div>
+
 
 <script>
+    var check = sessionStorage.getItem("darkmode");
+
     var chart = anychart.line(@Html.Raw(ViewBag.history));
     chart.title("@ViewBag.currency.name price history ");
     var xAxis = chart.xAxis();
@@ -89,6 +91,34 @@
     var yAxis = chart.yAxis();
     yAxis.title("Price, $");
     chart.container("container");
-
+    if (check == "true") {
+        chart.background().fill("#191F2B");
+    }
     chart.draw();
+
+
+    document.getElementById("flexSwitchCheckDefault").addEventListener('change', function() {
+        document.getElementById("container").innerHTML = "";
+
+        if (document.getElementById("flexSwitchCheckDefault").checked) {
+            var check = true;
+        } else {
+            var check = false;
+        }
+        var chart = anychart.line(@Html.Raw(ViewBag.history));
+        chart.title("@ViewBag.currency.name price history ");
+        var xAxis = chart.xAxis();
+        xAxis.title("Date");
+        var yAxis = chart.yAxis();
+        yAxis.title("Price, $");
+        chart.container("container");
+        if (check) {
+            chart.background().fill("#191F2B");
+        } else {
+            chart.background().fill("white");
+        }
+        chart.draw();
+    });
+
+
 </script>

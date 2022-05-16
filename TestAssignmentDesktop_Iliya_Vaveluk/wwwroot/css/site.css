@@ -42,8 +42,8 @@ body {
     margin-right: 0;
     margin-left: 0;
     border-width: 1px;
-   border-radius:0.25rem;
-    border: solid #dee2e6;
+    border-radius: 0.25rem;
+    border: solid #E0E0E0;
 }
 
 .elastic li.hide, .elastic.hide {
@@ -64,7 +64,7 @@ body {
 }
 
     .elastic li:hover {
-        background-color: #eeeeee;
+        background-color: #2F80ED;
     }
 
     .elastic li:first-child {
@@ -90,7 +90,7 @@ body {
     background-clip: padding-box;
     box-shadow: 0 5px 25px -5px rgba(0,0,0,0.4);
     top:58px;
-    left:638px;
+    left:625px;
 }
 
 .search_title {
@@ -106,6 +106,8 @@ body {
     padding: 10px;
     display: inline-block;
     width: 100%;
+    border:1px solid; 
+    border-radius:0.25rem;
 }
 
 .small_search {
@@ -134,4 +136,16 @@ body {
 }
 .nav-link {
     color: #2F80ED;
+}
+.table td{
+    text-align:center;
+}
+.dark-mode {
+    background-color: #191F2B;
+    color: white;
+}
+.card {
+    border-width: 1px;
+    border-radius: 0.25rem;
+    border: solid #E0E0E0;
 }

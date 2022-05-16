@@ -1,6 +1,55 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Converter";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="row g-2 mb-3">
+    <div class="col-md">
+        <div class="form-floating">
+            <input type="email" class="form-control" onchange="Converter()" id="floatingInputGrid1" placeholder="name@example.com" >
+            <label for="floatingInputGrid1"></label>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelectGrid1" aria-label="Floating label select example">
+                <option selected>Open this select menu</option>
+                @foreach (var item in ViewBag.allCurrencies)
+                {
+                    <option>@item.name(@item.symbol)</option>
+                }
+            </select>
+            <label for="floatingSelectGrid1">Currencies</label>
+        </div>
+    </div>
+</div>
+
+<div class="row g-2">
+    <div class="col-md">
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInputGrid2" placeholder="name@example.com" >
+            <label for="floatingInputGrid2"></label>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelectGrid2" aria-label="Floating label select example">
+                <option selected>Open this select menu</option>
+                @foreach (var item in ViewBag.allCurrencies)
+                {
+                    <option>@item.name(@item.symbol)</option>
+                }
+            </select>
+            <label for="floatingSelectGrid2">Currencies</label>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const arr = new Map([@Html.Raw(ViewBag.JSArray)]);
+    function Converter(){
+
+
+    }
+</script>

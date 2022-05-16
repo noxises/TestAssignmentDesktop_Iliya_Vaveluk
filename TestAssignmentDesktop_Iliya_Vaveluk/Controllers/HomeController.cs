@@ -7,7 +7,7 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 {
     public class HomeController : Controller
     {
-        
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -31,8 +31,21 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
             return View();
         }
 
+        string GetStringForJSArray(List<AllCurrenciesModel> list)
+        {
+            var array = "";
+            foreach (var item in list)
+            {
+                array += "['" + item.name + "(" + item.symbol + ")'" + ",'" + item.priceUsd + "'],";
+            }
+            return array;
+        }
+
         public IActionResult Converter()
         {
+            var allCurrencies = APIController.GetAllCurrencies();
+            ViewBag.allCurrencies = allCurrencies;
+            ViewBag.JSArray = GetStringForJSArray(allCurrencies);
             return View();
         }
 
