@@ -10,7 +10,7 @@
         public string maxSupply { get; set; }
         public string marketCapUsd { get; set; }
         public string volumeUsd24Hr { get; set; }
-        public string priceUsd { get; set; }
+        public decimal priceUsd { get; set; }
         public string changePercent24Hr { get; set; }
         public string vwap24Hr { get; set; }
     }

@@ -15,4 +15,123 @@ html {
 
 body {
   margin-bottom: 60px;
+
+}
+
+.top_currencies_list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.top_currency {
+    flex-basis: 24%;
+    display: block;
+    margin:5px;
+    font-size: 18px;
+}
+.currency_link {
+    color: #2F80ED;
+    text-decoration:none;
+}
+.display-4{
+    font-weight: 500;
+    margin-bottom:20px;
+}
+.currency_table {
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: 1px;
+   border-radius:0.25rem;
+    border: solid #dee2e6;
+}
+
+.elastic li.hide, .elastic.hide {
+    display: none;
+}
+
+.elastic li {
+    list-style: none;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 2px solid #e8e8e8;
+    width: 100%;
+    transition: .3s;
+    cursor: pointer;
+}
+
+    .elastic li:hover {
+        background-color: #eeeeee;
+    }
+
+    .elastic li:first-child {
+        border-top: none;
+    }
+
+    .elastic li:last-child {
+        margin-bottom: 30px;
+    }
+
+.elastic {
+   
+    position: absolute;
+    min-width: 300px;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 5px 25px -5px rgba(0,0,0,0.4);
+    top:58px;
+    left:638px;
+}
+
+.search_title {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+
+
+.input_search, .search_active {
+    min-width: 300px;
+    padding: 10px;
+    display: inline-block;
+    width: 100%;
+}
+
+.small_search {
+    display: none;
+}
+
+@media (max-width:1200px) {
+    .small_search {
+        display: block;
+    }
+
+    .elastic {
+        margin: auto;
+        max-width: 90%;
+        width: 100%;
+        right: 0;
+        left: 0;
+        top: 50px;
+    }
+}
+.li_search{
+    min-width: 300px;
+}
+.header-search{
+
+}
+.nav-link {
+    color: #2F80ED;
 }

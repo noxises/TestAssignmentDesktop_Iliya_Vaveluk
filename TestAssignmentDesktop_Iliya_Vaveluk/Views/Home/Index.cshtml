@@ -1,16 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    
-           
+
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-   <ul>
-       @foreach (var item in  ViewBag.currencies){
-       <li>
-           <a href="Home/Currency/@item.id">@item.name</a>
-       </li>
-           }
-   </ul>
+<div class="container text-center">
+    <h1 class="display-4">Top 10 currencies</h1>
+    <div class="top_currencies_list">
+
+        @foreach (var item in ViewBag.currencies)
+        {
+            
+            <div class="top_currency">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">@item.name</h5>
+                        <p class="card-text mb-0">Price:</p>
+                        <p class="card-text mb-0"> @item.priceUsd  $</p>
+                        <a class="btn btn-primary mt-2" href="Home/Currency/@item.id">See more</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <h1 class="display-4">Currencies</h1>
+    <ul class="top_currencies_list">
+        @foreach (var item in ViewBag.allCurrencies)
+        {
+            <li class="top_currency ">
+                <a class="currency_link" href="Home/Currency/@item.id">@item.name</a>
+            </li>
+        }
+    </ul>
 </div>

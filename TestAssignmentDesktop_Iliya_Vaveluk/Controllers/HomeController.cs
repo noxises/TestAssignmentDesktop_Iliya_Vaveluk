@@ -18,6 +18,7 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
         public IActionResult Index()
         {
             ViewBag.currencies = APIController.GetTop10Currencies();
+            ViewBag.allCurrencies = APIController.GetAllCurrencies();
             return View();
         }
 
@@ -30,7 +31,7 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Converter()
         {
             return View();
         }

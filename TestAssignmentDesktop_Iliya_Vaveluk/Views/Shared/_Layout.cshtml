@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var allCurrencies = APIController.GetAllCurrencies();
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,24 +16,54 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TestAssignmentDesktop_Iliya_Vaveluk</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Converter</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Converter">Converter</a>
                         </li>
+
                     </ul>
+                    <div class="header-search js-search-form">
+                        <form>
+                            <div>
+
+                                <input class="input_search big elastic-box" type="search" name="q" minlength="5"
+                                       id="elastic" placeholder="Start typing currencies name" oninput="livesearch()" autocomplete="off" required>
+                            </div>
+                        </form>
+                        <i class="fa fa-search js-search" aria-hidden="true"></i>
+                    </div>
+                    <ul class="elastic hide">
+                        <li class="error hide" title="$">NOTING TO SHOW ON SEARCH</li>
+
+                        @foreach (var currencyList in allCurrencies)
+                        {
+
+                            <li class="hide" title="@currencyList.name" onclick="location.href='/Home/Currency/@currencyList.id'">
+
+                                <div class="search_title">@currencyList.name (@currencyList.symbol)</div>
+
+                            </li>
+                        }
+                    </ul>
+                    <div>
+                    <button>
+                        darkmode
+                    </button>
                 </div>
+                </div>
+                
             </div>
+
         </nav>
     </header>
     <div class="container">
@@ -42,8 +77,58 @@
             &copy; 2022 - TestAssignmentDesktop_Iliya_Vaveluk - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <script>
+        function livesearch() {
+            var i = 0;
+            let val = document.querySelector('.elastic-box').value.trim();
+            let elasticItems = document.querySelectorAll('.elastic li');
+            if (val != '') {
+                if (/[a-zA-Z]/.test(val)) {
+                    document.querySelector('.elastic-box').classList.add('search_active')
+                    document.querySelector('.elastic-box').classList.remove('input_search')
+                    elasticItems.forEach(function(elem) {
+
+                        if (elem.getAttribute('title').search(RegExp(val, "gi")) == -1) {
+                            elem.classList.add('hide');
+                            if (i == 0) {
+                                document.querySelector('.error').classList.remove('hide')
+                            } else {
+                                document.querySelector('.elastic').classList.remove('hide')
+                                document.querySelector('.error').classList.add('hide')
+                            }
+                        } else {
+                            i++;
+                            elem.classList.remove('hide');
+                            if (i == 0) {
+                                document.querySelector('.elastic').classList.add('hide')
+                            } else {
+                                document.querySelector('.elastic').classList.remove('hide')
+                            }
+                        }
+                    });
+                } else {
+
+                    document.querySelector('.elastic').classList.remove('hide')
+                    document.querySelector('.elastic-box').classList.add('search_active')
+                    document.querySelector('.elastic-box').classList.remove('input_search')
+                    document.querySelector('.error').classList.remove('hide')
+
+                }
+            } else {
+                elasticItems.forEach(function(elem) {
+                    elem.classList.add('hide');
+                    document.querySelector('.elastic').classList.add('hide')
+                    document.querySelector('.elastic-box').classList.remove('search_active')
+                    document.querySelector('.elastic-box').classList.add('input_search')
+
+                });
+            }
+        }
+
+
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

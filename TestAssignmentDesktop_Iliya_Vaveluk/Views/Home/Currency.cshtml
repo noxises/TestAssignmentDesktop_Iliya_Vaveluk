@@ -3,28 +3,81 @@
     ViewData["Title"] = ViewBag.currency.name;
 
 }
+<h1 class="text-center">@ViewBag.currency.name</h1>
 
-@foreach (var exchange in ViewBag.exchanges)
+<div class="currency_table">
+    <table class="table">
 
-{
+        <tbody>
+            <tr>
+                <td>symbol</td>
+                <td>@ViewBag.currency.symbol</td>
+                <td>most common symbol used to identify this asset on an exchange</td>
+            </tr>
+            <tr>
+                <td>supply</td>
+                <td>@ViewBag.currency.supply</td>
+                <td>available supply for trading</td>
+            </tr>
+            <tr>
+                <td>maxSupply</td>
+                <td>@ViewBag.currency.maxSupply</td>
+                <td>total quantity of asset issued</td>
+            </tr>
+            <tr>
+                <td>marketCapUsd</td>
+                <td>@ViewBag.currency.marketCapUsd</td>
+                <td>supply x price</td>
+            </tr>
+            <tr>
+                <td>volumeUsd24Hr</td>
+                <td>@ViewBag.currency.volumeUsd24Hr</td>
+                <td>quantity of trading volume represented in USD over the last 24 hours</td>
+            </tr>
+            <tr>
+                <td>priceUsd</td>
+                <td>@ViewBag.currency.priceUsd</td>
+                <td>weighted price based on real-time market data, translated to USD</td>
+            </tr>
+            <tr>
+                <td>changePercent24Hr</td>
+                <td>@ViewBag.currency.changePercent24Hr</td>
+                <td>the direction and value change in the last 24 hours</td>
+            </tr>
+            <tr>
+                <td>vwap24Hr</td>
+                <td>@ViewBag.currency.vwap24Hr</td>
+                <td>Volume Weighted Average Price in the last 24 hours</td>
 
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-    var i = 0;
-    foreach (var item in ViewBag.markets)
+<h2 class="text-center">Markets</h2>
+<ul class="top_currencies_list">
+    @foreach (var exchange in ViewBag.exchanges)
+
     {
-        if (item.exchangeId == exchange.name && i < 1)
-        {
-            i++;
-            <a href="@exchange.exchangeUrl">@exchange.name</a>
-            <br />
-        }
-    }
 
-}
+        var i = 0;
+        foreach (var item in ViewBag.markets)
+        {
+            if (item.exchangeId == exchange.name && i < 1)
+            {
+                i++;
+                <li class="top_currency">
+                    <a class="currency_link" href="@exchange.exchangeUrl">@exchange.name</a>
+                </li>
+
+            }
+        }
+
+    }
+</ul>
 
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-cartesian.min.js"></script>
-<h1>Currency</h1>
 
 <div id="container" style="height:500px"></div>
 
