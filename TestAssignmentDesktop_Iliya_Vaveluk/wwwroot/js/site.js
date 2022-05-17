@@ -6,7 +6,7 @@ $(document).ready(function () {
         var header = document.getElementById("nav");
         var search = document.getElementById("elastic");
         var card = document.querySelectorAll("#card");
-        var elastic = document.querySelectorAll("#elastic-list li" );
+        var elastic = document.querySelectorAll("#elastic-list li");
         var table = document.getElementById("table")
 
 
@@ -18,7 +18,7 @@ $(document).ready(function () {
             if (table) {
                 table.classList.add("dark-mode");
             }
-            
+
             elastic.forEach((el) => {
                 el.classList.add("dark-mode");
             })
@@ -35,7 +35,7 @@ $(document).ready(function () {
             if (table) {
                 table.classList.remove("dark-mode");
             }
-          
+
             elastic.forEach((el) => {
                 el.classList.remove("dark-mode");
             })
@@ -49,7 +49,7 @@ $(document).ready(function () {
 addEventListener('load', Check());
 function Check() {
     var check = sessionStorage.getItem("darkmode");
-    console.log(check);
+
 }
 
 addEventListener('load', DarkMode());
@@ -125,3 +125,15 @@ function livesearch() {
     }
 }
 
+function CloseSearch() {
+    
+    let elasticItems = document.querySelectorAll('.elastic li');
+    document.querySelector('.elastic-box').value = "";
+    elasticItems.forEach(function (elem) {
+        elem.classList.add('hide');
+        document.querySelector('.elastic').classList.add('hide')
+        document.querySelector('.elastic-box').classList.remove('search_active')
+        document.querySelector('.elastic-box').classList.add('input_search')
+
+    });
+}

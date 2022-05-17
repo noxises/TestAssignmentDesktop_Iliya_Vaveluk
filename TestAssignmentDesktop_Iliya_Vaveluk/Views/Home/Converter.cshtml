@@ -6,7 +6,7 @@
 <div class="row g-2 mb-3">
     <div class="col-md">
         <div class="form-floating">
-            <input type="email" class="form-control" onchange="Converter()" id="floatingInputGrid1" placeholder="name@example.com" >
+            <input type="email" class="form-control" oninput="Converter()" id="floatingInputGrid1" placeholder="name@example.com">
             <label for="floatingInputGrid1"></label>
         </div>
     </div>
@@ -16,7 +16,7 @@
                 <option selected>Open this select menu</option>
                 @foreach (var item in ViewBag.allCurrencies)
                 {
-                    <option>@item.name(@item.symbol)</option>
+                    <option>@item.name (@item.symbol)</option>
                 }
             </select>
             <label for="floatingSelectGrid1">Currencies</label>
@@ -27,7 +27,7 @@
 <div class="row g-2">
     <div class="col-md">
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInputGrid2" placeholder="name@example.com" >
+            <input type="email" class="form-control" id="floatingInputGrid2" placeholder="name@example.com">
             <label for="floatingInputGrid2"></label>
         </div>
     </div>
@@ -37,7 +37,7 @@
                 <option selected>Open this select menu</option>
                 @foreach (var item in ViewBag.allCurrencies)
                 {
-                    <option>@item.name(@item.symbol)</option>
+                    <option>@item.name (@item.symbol)</option>
                 }
             </select>
             <label for="floatingSelectGrid2">Currencies</label>
@@ -47,9 +47,16 @@
 
 
 <script>
+
+
     const arr = new Map([@Html.Raw(ViewBag.JSArray)]);
-    function Converter(){
 
-
+    function Converter() {
+        var currency1 = document.getElementById("floatingSelectGrid1").value;
+        var currency2 = document.getElementById("floatingSelectGrid2").value;
+        var currency1Value = document.getElementById("floatingInputGrid1").value;
+        var change = arr.get(currency1) / arr.get(currency2) * currency1Value;
+        document.getElementById("floatingInputGrid2").value = change;
     }
+
 </script>

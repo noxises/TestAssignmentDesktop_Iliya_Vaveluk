@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TestAssignmentDesktop_Iliya_Vaveluk.Models;
-using Newtonsoft.Json;
+
 
 namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 {
@@ -17,8 +17,8 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.currencies = APIController.GetTop10Currencies();
-            ViewBag.allCurrencies = APIController.GetAllCurrencies();
+
+            ViewBag.allCurrencies = APIController.GetAllCurrencies().OrderBy(item => item.rank);
             return View();
         }
 
@@ -36,7 +36,7 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
             var array = "";
             foreach (var item in list)
             {
-                array += "['" + item.name + "(" + item.symbol + ")'" + ",'" + item.priceUsd + "'],";
+                array += "['" + item.name + " (" + item.symbol + ")'" + ",'" + item.priceUsd + "'],";
             }
             return array;
         }

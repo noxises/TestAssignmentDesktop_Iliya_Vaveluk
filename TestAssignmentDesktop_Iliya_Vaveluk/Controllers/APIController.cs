@@ -28,13 +28,6 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
             Root? myDeserializedClass = JsonConvert.DeserializeObject<Root>(response);
             return myDeserializedClass.data;
         }
-        public static List<AllCurrenciesModel> GetTop10Currencies()
-        {
-            var response = GetResponse("https://api.coincap.io/v2/assets?limit=10").GetAwaiter().GetResult();
-            Root? myDeserializedClass = JsonConvert.DeserializeObject<Root>(response);
-            return myDeserializedClass.data;
-        }
-
         public static CurrencyModel? GetCurrency(string id)
         {
             var response = GetResponse($"https://api.coincap.io/v2/assets/{id}").GetAwaiter().GetResult();
