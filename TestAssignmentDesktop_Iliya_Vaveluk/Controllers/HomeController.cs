@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TestAssignmentDesktop_Iliya_Vaveluk.Models;
+using Microsoft.AspNetCore.Localization;
 
 
 namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
@@ -17,6 +18,7 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
 
         public IActionResult Index()
         {
+
 
             ViewBag.allCurrencies = APIController.GetAllCurrencies().OrderBy(item => item.rank);
             return View();
@@ -53,6 +55,17 @@ namespace TestAssignmentDesktop_Iliya_Vaveluk.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }

@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -15,16 +15,16 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: white;
-    color: black;
+    background-color: #191F2B;
+    color: white;
 }
 
 .top_currencies_list {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    background-color: white;
-    color: black;
+    background-color: #191F2B;
+    color: white;
 }
 
 .top_currency {
@@ -32,8 +32,8 @@ body {
     margin-bottom: 25px;
     margin-left: 25px;
     font-size: 18px;
-    background-color: white;
-    color: black;
+    background-color: #191F2B;
+    color: white;
 }
 
 .currency {
@@ -41,13 +41,14 @@ body {
     display: block;
     margin-bottom: 10px;
     font-size: 18px;
-    background-color: white;
-    color: black;
+    background-color: #191F2B;
+    color: white;
 }
 
 .currency_link {
     color: #2F80ED;
     text-decoration: none;
+
 }
 
 .display-4 {
@@ -108,8 +109,8 @@ body {
     box-shadow: 0 5px 25px -5px rgba(0,0,0,0.4);
     top: 58px;
     left: 618px;
-    background-color: white;
-    color: black;
+    background-color: #191F2B;
+    color: white;
 }
 
 .search_title {
@@ -127,8 +128,8 @@ body {
     width: 100%;
     border: 1px solid;
     border-radius: 0.25rem;
-    background-color: white;
-    color: black;
+    background-color: #191F2B;
+    color: white;
 }
 
 .small_search {
@@ -159,49 +160,43 @@ body {
 
 .nav-link {
     color: #2F80ED;
-}
 
+}
 .table {
-    background-color: white;
-    color: black;
-    font-size: 15px;
+    background-color: #191F2B;
+    color: white;
 }
 
-    .table td {
-        text-align: center;
-    }
-
-
-
-.card {
-    border-width: 1px;
-    border-radius: 0.25rem;
-    border: solid #E0E0E0;
-    background-color: white;
-    color: black;
-}
-
-.form-control:focus {
-    background-color: white;
-    color: black;
-}
-
-.form-control {
-    background-color: white;
-    color: black;
-}
-
-.form-select {
-    background-color: white;
-    color: black;
-}
-
-.language_select {
-    position: absolute;
-    right: 170px;
+.table td {
+    text-align: center;
 }
 
 .dark-mode {
     background-color: #191F2B;
     color: white;
+}
+
+.card {
+    border-width: 1px;
+    border-radius: 0.25rem;
+    border: solid #E0E0E0;
+    background-color: #191F2B;
+    color: white;
+}
+
+.form-control:focus {
+    background-color: #191F2B;
+    color: white;
+}
+.form-control {
+    background-color: #191F2B;
+    color: white;
+}
+.form-select {
+    background-color: #191F2B;
+    color: white;
+}
+.language_select {
+    position: absolute;
+    right: 170px;
 }

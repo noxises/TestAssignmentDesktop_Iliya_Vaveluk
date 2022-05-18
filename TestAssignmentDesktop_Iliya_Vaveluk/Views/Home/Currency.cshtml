@@ -1,9 +1,14 @@
-﻿@{
+﻿
+
+@{
 
     ViewData["Title"] = ViewBag.currency.name;
 
 }
-<h1 class="text-center">@ViewBag.currency.name (@ViewBag.currency.symbol)</h1>
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+<h1 class="text-center mt-4 mb-4">@ViewBag.currency.name (@ViewBag.currency.symbol)</h1>
 
 <div class="currency_table">
     <table class="table" id="table">
@@ -11,31 +16,31 @@
         <tbody>
 
             <tr>
-                <td>volume</td>
+                <td>@Localizer["Volume"]</td>
                 <td>@ViewBag.currency.volumeUsd24Hr</td>
-                <td>quantity of trading volume represented in USD over the last 24 hours</td>
+                <td>@Localizer["Volume_description"]</td>
             </tr>
             <tr>
-                <td>price</td>
+                <td>@Localizer["Price"]</td>
                 <td>@ViewBag.currency.priceUsd $</td>
-                <td>weighted price based on real-time market data, translated to USD</td>
+                <td>@Localizer["Price_description"]</td>
             </tr>
             <tr>
-                <td>changePercent24Hr</td>
+                <td>@Localizer["changePercent24Hr"]</td>
                 <td>@ViewBag.currency.changePercent24Hr</td>
-                <td>the direction and value change in the last 24 hours</td>
+                <td>@Localizer["changePercent24Hr_description"]</td>
             </tr>
             <tr>
-                <td>vwap24Hr</td>
+                <td>@Localizer["vwap24Hr"]</td>
                 <td>@ViewBag.currency.vwap24Hr</td>
-                <td>Volume Weighted Average Price in the last 24 hours</td>
+                <td>@Localizer["vwap24Hr_description"]</td>
 
             </tr>
         </tbody>
     </table>
 </div>
 
-<h2 class="text-center mt-2">Markets</h2>
+<h2 class="text-center mt-4 mb-4">@Localizer["Markets"]</h2>
 <div class="top_currencies_list mb-4">
     @foreach (var exchange in ViewBag.exchanges)
     {
@@ -52,9 +57,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://zaif.jp/instant_exchange/currency#@ViewBag.currency.symbol" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://zaif.jp/instant_exchange/currency#@ViewBag.currency.symbol" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -68,9 +73,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://p2p.binance.com/en/trade/all-payments/@ViewBag.currency.symbol?fiat=CNY" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://p2p.binance.com/en/trade/all-payments/@ViewBag.currency.symbol?fiat=CNY" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -82,9 +87,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://whitebit.com/ua/trade/@ViewBag.currency.symbol-USDT" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://whitebit.com/ua/trade/@ViewBag.currency.symbol-USDT" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -97,9 +102,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.lbank.info/trade.html#/buy" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.lbank.info/trade.html#/buy" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -113,9 +118,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://c2c.bkex.com/c2c/repidBuy?direction=B&currencyCoins=THB&coinType=USDT&repidMoney=&buyState=1" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://c2c.bkex.com/c2c/repidBuy?direction=B&currencyCoins=THB&coinType=USDT&repidMoney=&buyState=1" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -128,9 +133,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.digifinex.com/en-ww/trade/USDT/@ViewBag.currency.symbol" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.digifinex.com/en-ww/trade/USDT/@ViewBag.currency.symbol" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -142,9 +147,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://c2c.hbg.com/en-us/trade/buy-@ViewBag.currency.symbol.ToLower()/" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://c2c.hbg.com/en-us/trade/buy-@ViewBag.currency.symbol.ToLower()/" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -157,9 +162,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.cointiger.com/en-us/#/trade_center?coin=@ViewBag.currency.symbol.ToLower()_usdt/" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.cointiger.com/en-us/#/trade_center?coin=@ViewBag.currency.symbol.ToLower()_usdt/" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -183,9 +188,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.coinbase.com/price/@name.ToLower()/" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.coinbase.com/price/@name.ToLower()/" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -198,9 +203,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://hitbtc.com/@ViewBag.currency.symbol-to-usdt" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://hitbtc.com/@ViewBag.currency.symbol-to-usdt" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -213,9 +218,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://app.uniswap.org/#/swap?chain=mainnet" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://app.uniswap.org/#/swap?chain=mainnet" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -228,9 +233,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.kraken.com/u/instant?receive=@ViewBag.currency.symbol" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.kraken.com/u/instant?receive=@ViewBag.currency.symbol" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -243,9 +248,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">Pr@Localizer["Price"]ice:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://app.sushi.com/swap?inputCurrency=@ViewBag.currency.symbol&outputCurrency=0x6B3595068778DD592e39A122f4f5a5cF09C90fE2" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://app.sushi.com/swap?inputCurrency=@ViewBag.currency.symbol&outputCurrency=0x6B3595068778DD592e39A122f4f5a5cF09C90fE2" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -276,9 +281,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.gate.io/buy_crypto" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.gate.io/buy_crypto" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -292,9 +297,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.zb.com/en/trade/@location" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.zb.com/en/trade/@location" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -307,9 +312,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://big.one/en/trade/@ViewBag.currency.symbol-USDT" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://big.one/en/trade/@ViewBag.currency.symbol-USDT" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -322,9 +327,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.bitstamp.net/markets/@ViewBag.currency.symbol.ToLower()/usd/" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.bitstamp.net/markets/@ViewBag.currency.symbol.ToLower()/usd/" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -347,9 +352,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://app.thorswap.finance/swap" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://app.thorswap.finance/swap" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -363,9 +368,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://dex-trade.com/spot/trading/@location" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://dex-trade.com/spot/trading/@location" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -379,9 +384,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://indodax.com/market/@location" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://indodax.com/market/@location" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -395,9 +400,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.coinex.com/info/@ViewBag.currency.symbol" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.coinex.com/info/@ViewBag.currency.symbol" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -411,9 +416,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://poloniex.com/cards/buy/" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://poloniex.com/cards/buy/" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -427,9 +432,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.bitkub.com/market/@ViewBag.currency.symbol" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.bitkub.com/market/@ViewBag.currency.symbol" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -443,9 +448,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://exmo.com/buy-crypto" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://exmo.com/buy-crypto" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -465,9 +470,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.bibox.com/en/otc" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.bibox.com/en/otc" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -487,9 +492,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://exmarkets.com/trade/@ViewBag.currency.symbol.ToLower()-usdt" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://exmarkets.com/trade/@ViewBag.currency.symbol.ToLower()-usdt" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -515,9 +520,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://mercatox.com/exchange/@ViewBag.currency.symbol/BTC" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://mercatox.com/exchange/@ViewBag.currency.symbol/BTC" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -531,9 +536,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.liquid.com/quick-exchange/" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.liquid.com/quick-exchange/" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -547,9 +552,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="https://www.probit.com/app/exchange/@ViewBag.currency.symbol-USDT" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="https://www.probit.com/app/exchange/@ViewBag.currency.symbol-USDT" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -562,9 +567,9 @@
                         <div class="card" id="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">@exchange.name</h5>
-                                <p class="card-text mb-0">Price:</p>
+                                <p class="card-text mb-0">@Localizer["Price"]:</p>
                                 <p class="card-text mb-0"> @item.priceUsd  $</p>
-                                <a class="btn btn-primary mt-2" href="@exchange.exchangeUrl" target="_blank">See more</a>
+                                <a class="btn btn-primary mt-2" href="@exchange.exchangeUrl" target="_blank">@Localizer["See_More"]</a>
                             </div>
                         </div>
                     </div>
@@ -578,50 +583,53 @@
 
     }
 </div>
+
+<h2 class="text-center mt-4 mb-4">@ViewBag.currency.name @Localizer["Price_History"]</h2>
 <div id="container" class="border-top" style="height:500px"></div>
-<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
-<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-cartesian.min.js"></script>
 
 
 
-<script>
-    var check = sessionStorage.getItem("darkmode");
+@section Scripts
+    {
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-cartesian.min.js"></script>
+    <script>
 
-    var chart = anychart.line(@Html.Raw(ViewBag.history));
-    chart.title("@ViewBag.currency.name price history ");
-    var xAxis = chart.xAxis();
-    xAxis.title("Date");
-    var yAxis = chart.yAxis();
-    yAxis.title("Price, $");
-    chart.container("container");
-    if (check == "true") {
-        chart.background().fill("#191F2B");
-    }
-    chart.draw();
+        var check = sessionStorage.getItem("darkmode");
 
-
-    document.getElementById("flexSwitchCheckDefault").addEventListener('change', function() {
-        document.getElementById("container").innerHTML = "";
-
-        if (document.getElementById("flexSwitchCheckDefault").checked) {
-            var check = true;
-        } else {
-            var check = false;
-        }
         var chart = anychart.line(@Html.Raw(ViewBag.history));
-        chart.title("@ViewBag.currency.name price history ");
+
         var xAxis = chart.xAxis();
         xAxis.title("Date");
         var yAxis = chart.yAxis();
         yAxis.title("Price, $");
         chart.container("container");
-        if (check) {
+        if (check == "true") {
             chart.background().fill("#191F2B");
-        } else {
-            chart.background().fill("white");
         }
         chart.draw();
-    });
 
+        document.getElementById("flexSwitchCheckDefault").addEventListener('change', function() {
+            document.getElementById("container").innerHTML = "";
 
-</script>
+            if (document.getElementById("flexSwitchCheckDefault").checked) {
+                var check = true;
+            } else {
+                var check = false;
+            }
+            var chart = anychart.line(@Html.Raw(ViewBag.history));
+            chart.title("@ViewBag.currency.name price history ");
+            var xAxis = chart.xAxis();
+            xAxis.title("Date");
+            var yAxis = chart.yAxis();
+            yAxis.title("Price, $");
+            chart.container("container");
+            if (check) {
+                chart.background().fill("#191F2B");
+            } else {
+                chart.background().fill("white");
+            }
+            chart.draw();
+        });
+    </script>
+}

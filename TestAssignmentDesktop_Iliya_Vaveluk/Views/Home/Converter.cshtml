@@ -1,25 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Converter";
 }
-<h1>@ViewData["Title"]</h1>
+@using Microsoft.AspNetCore.Mvc.Localization
+ 
+@inject IViewLocalizer Localizer
+<h1>@Localizer["Title"]</h1>
 
 <div class="row g-2 mb-3">
     <div class="col-md">
         <div class="form-floating">
-            <input type="email" class="form-control" oninput="Converter()" id="floatingInputGrid1" placeholder="name@example.com">
+            <input type="number"  min="0" class="form-control" pattern="\d+(\.\d{2})?" oninput="Converter()" id="floatingInputGrid1" >
             <label for="floatingInputGrid1"></label>
         </div>
     </div>
     <div class="col-md">
         <div class="form-floating">
-            <select class="form-select" id="floatingSelectGrid1" aria-label="Floating label select example">
-                <option selected>Open this select menu</option>
+            <select class="form-select" id="floatingSelectGrid1" onchange="Converter()" aria-label="Floating label select example">
+                <option selected>Bitcoin (BTC)</option>
                 @foreach (var item in ViewBag.allCurrencies)
                 {
+                    if (@item.name == "Bitcoin")
+                    {
+                        continue;
+                    }
                     <option>@item.name (@item.symbol)</option>
                 }
             </select>
-            <label for="floatingSelectGrid1">Currencies</label>
+            <label for="floatingSelectGrid1">@Localizer["Currencies"]</label>
         </div>
     </div>
 </div>
@@ -27,24 +34,29 @@
 <div class="row g-2">
     <div class="col-md">
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInputGrid2" placeholder="name@example.com">
+            <input type="number" min="0" class="form-control" pattern="\d+(\.\d{2})?" oninput="ConverterForSecondInput()" id="floatingInputGrid2" >
             <label for="floatingInputGrid2"></label>
         </div>
     </div>
     <div class="col-md">
         <div class="form-floating">
-            <select class="form-select" id="floatingSelectGrid2" aria-label="Floating label select example">
-                <option selected>Open this select menu</option>
+            <select class="form-select" id="floatingSelectGrid2" onchange="ConverterForSecondInput()" aria-label="Floating label select example">
+                <option selected>Bitcoin (BTC)</option>
                 @foreach (var item in ViewBag.allCurrencies)
                 {
+                    if (@item.name == "Bitcoin")
+                    {
+                        continue;
+                    }
                     <option>@item.name (@item.symbol)</option>
                 }
             </select>
-            <label for="floatingSelectGrid2">Currencies</label>
+            <label for="floatingSelectGrid2">@Localizer["Currencies"]</label>
         </div>
     </div>
 </div>
-
+@section Scripts
+{
 
 <script>
 
@@ -58,5 +70,14 @@
         var change = arr.get(currency1) / arr.get(currency2) * currency1Value;
         document.getElementById("floatingInputGrid2").value = change;
     }
-
+    function ConverterForSecondInput() {
+        var currency1 = document.getElementById("floatingSelectGrid1").value;
+        var currency2 = document.getElementById("floatingSelectGrid2").value;
+        var currency1Value = document.getElementById("floatingInputGrid1").value;
+        var currency2Value = document.getElementById("floatingInputGrid2").value;
+        var change = arr.get(currency2) / arr.get(currency1) * currency2Value;
+        document.getElementById("floatingInputGrid1").value = change;
+    }
+   
 </script>
+}

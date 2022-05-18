@@ -1,22 +1,52 @@
 ﻿@{
     var allCurrencies = APIController.GetAllCurrencies();
-}
 
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+ 
+@inject IViewLocalizer Localizer
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] - TestAssignmentDesktop_Iliya_Vaveluk</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/TestAssignmentDesktop_Iliya_Vaveluk.styles.css" asp-append-version="true" />
 
+    <script>
+        function CheckDarkMode() {
+            if (!sessionStorage.getItem('darkmode')) {
+                sessionStorage.setItem('darkmode', 'false');
+            }
+            var check = sessionStorage.getItem('darkmode');
+
+            if (check == "true") {
+
+                document.documentElement.style.display = 'none';
+                document.head.insertAdjacentHTML(
+                    'beforeend',
+                    '<link rel="stylesheet" href="/css/Dark.css" onload="document.documentElement.style.display = \'\'">',
+                );
+            } else {
+                document.documentElement.style.display = 'none';
+                document.head.insertAdjacentHTML(
+                    'beforeend',
+                    '<link rel="stylesheet" href="/css/site.css" onload="document.documentElement.style.display = \'\'">',
+                );
+            };
+        }
+        document.addEventListener('load', CheckDarkMode());
+
+    </script>
 
 
 </head>
+
 <body onclick="CloseSearch()">
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm " id="nav">
             <div class="container-fluid">
@@ -27,10 +57,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Converter">Converter</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Converter">@Localizer["Converter"]</a>
                         </li>
 
                     </ul>
@@ -39,28 +69,31 @@
                             <div>
 
                                 <input class="input_search big elastic-box" type="search" name="q" minlength="5"
-                                       id="elastic" placeholder="Start typing currency name" oninput="livesearch()" autocomplete="off" required>
+                                       id="elastic" placeholder="@Localizer["Search_placeholder"]" oninput="livesearch()" autocomplete="off" required>
                             </div>
                         </form>
                         <i class="fa fa-search js-search" aria-hidden="true"></i>
                     </div>
                     <ul class="elastic hide" id="elastic-list">
-                        <li class="error hide" title="$">NOTING TO SHOW ON SEARCH</li>
+                        <li class="error hide" title="$">@Localizer["Search_error"]</li>
 
                         @foreach (var currencyList in allCurrencies)
                         {
 
-                            <li class="hide" title="@currencyList.name" onclick="location.href='/Home/Currency/@currencyList.id'">
+                            <li class="hide" title="@currencyList.name (@currencyList.symbol)" onclick="location.href='/Home/Currency/@currencyList.id'">
 
                                 @currencyList.name (@currencyList.symbol)
 
                             </li>
                         }
                     </ul>
+                    <div class="language_select">
+                        @await Html.PartialAsync("_SelectLanguagePartial")
+                    </div>
                     <div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">DarkMode</label>
+                            <label class="form-check-label" for="flexSwitchCheckDefault">@Localizer["Dark_mode"]</label>
                         </div>
                     </div>
                 </div>
@@ -77,7 +110,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - TestAssignmentDesktop_Iliya_Vaveluk 
+            &copy; 2022 - TestAssignmentDesktop_Iliya_Vaveluk
         </div>
     </footer>
 
@@ -85,6 +118,9 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
