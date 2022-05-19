@@ -1,6 +1,7 @@
 # TestAssignmentDesktop_Iliya_Vaveluk
 
 API: https://docs.coincap.io/  
+Using Newtonsoft.Json for API 
 
 Main page with top 10 currency and all available currencies
 
